@@ -1,0 +1,29 @@
+# removes $1 from $PATH
+function pathRemove()  {
+  export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; 
+}
+
+
+# adds $1 to the front of $PATH if $PATH does not contain $1
+pathAdd() {
+  if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+
+# If $MAP_TO_CHROOT is defined, it executes the given command in the chroot $MAP_TO_CHROOT.
+# If $MAP_TO_CHROOT is not defined, it executes the given command on the "host".
+function execInChrooti() {
+  cmd="$(basename $1) ${*:2}"
+  if [ -n "${MAP_TO_CHROOT}" ]; then
+    echo "---------------------------------------------------------------------------------"
+    echo "executing ${cmd} in chroot ${MAP_TO_CHROOT}"
+    echo "---------------------------------------------------------------------------------"
+    echo ""
+    schroot -c ${MAP_TO_CHROOT} -- ${cmd}
+  else
+    pathRemove "$(dirname $(which $0))"
+    ${cmd}
+  fi
+}

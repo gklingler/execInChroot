@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source $(pwd)/helpers.source
+unset MAP_TO_CHROOT
+pathRemove $(pwd)

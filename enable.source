@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# --- set the name of the schroot ---
+export MAP_TO_CHROOT=ubuntu1204
+#------------------------------------
+
+source $(pwd)/helpers.source
+pathAdd $(pwd)
