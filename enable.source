@@ -3,6 +3,6 @@
 # --- set the name of the schroot ---
 export MAP_TO_CHROOT=ubuntu1204
 #------------------------------------
-
-source $(pwd)/helpers.source
-pathAdd $(pwd)
+DIR="$( cd "$( dirname "$0" )" && pwd )" # get directory of current file
+source ${DIR}/helpers.source
+pathAdd ${DIR}

@@ -14,7 +14,7 @@ pathAdd() {
 
 # If $MAP_TO_CHROOT is defined, it executes the given command in the chroot $MAP_TO_CHROOT.
 # If $MAP_TO_CHROOT is not defined, it executes the given command on the "host".
-function execInChrooti() {
+function execInChroot() {
   cmd="$(basename $1) ${*:2}"
   if [ -n "${MAP_TO_CHROOT}" ]; then
     echo "---------------------------------------------------------------------------------"
