@@ -10,10 +10,11 @@ Prerequisites: a chroot environmit accessible with schroot.
 * make 	          ... Example command for make
 
 ###usage
-You can add a custom command by adding a bash script with the name same name then the command that you want to execute inside the chroot (see existing example commands "gcc" and "make"). The content of every command are the same 3 lines:
+You can add a custom command by adding a bash script with the name same name then the command that you want to execute inside the chroot (see existing example commands "gcc" and "make"). The content of every command are the same 4 lines:
 
     #!/bin/bash
-    source $(pwd)/helpers.source
+    DIR="$( cd "$( dirname "$0" )" && pwd )" # get directory of current file
+    source ${DIR}/helpers.source
     execInChroot $0 "$@"
 
 e.g.: you want the command "cmake" to be execute inside the chroot, just add a file called "cmake", add the 3 lines from above and give the file execute permissions. In the shell where you want to use the commands, just execute "source enable.source" once. Now, when you call cmake, the cmake inside your chroot is executed.
